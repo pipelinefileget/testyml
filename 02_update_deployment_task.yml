@@ -10,15 +10,15 @@ spec:
       - name: deployment
         description: The name of the deployment patch the image
         type: string
-    steps:
-      - name: patch
-        image: quay.io/openshift/origin-cli:latest
-        command: ["/bin/bash", "-c"]
-        args:
-          - |-
-            oc patch deployment $(inputs.params.deployment) --patch='{"spec":{"template":{"spec":{
-              "containers":[{
-                "name": "$(inputs.params.deployment)",
-                "image":"$(inputs.resources.image.url)"
-              }]
-            }}}}'
+  steps:
+    - name: patch
+      image: quay.io/openshift/origin-cli:latest
+      command: ["/bin/bash", "-c"]
+      args:
+        - |-
+          oc patch deployment $(inputs.params.deployment) --patch='{"spec":{"template":{"spec":{
+            "containers":[{
+              "name": "$(inputs.params.deployment)",
+              "image":"$(inputs.resources.image.url)"
+            }]
+          }}}}'
